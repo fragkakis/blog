@@ -183,6 +183,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
+    oj (3.16.3)
+      bigdecimal (>= 3.0)
     psych (5.1.2)
       stringio
     public_suffix (5.0.5)
@@ -306,6 +308,7 @@ DEPENDENCIES
   httplog
   importmap-rails
   jbuilder
+  oj
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.3)
   rails_semantic_logger

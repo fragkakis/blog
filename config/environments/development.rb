@@ -1,4 +1,6 @@
 require "active_support/core_ext/integer/time"
+require "semantic_logger/formatters/datadog_json"
+require "json"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -74,5 +76,18 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.rails_semantic_logger.format = :json
+  config.rails_semantic_logger.format = SemanticLogger::Formatters::DatadogJson.new
+
 end
+
+DATADOG_LOG_FORMAT_ENABLED = ENV.fetch("DATADOG_LOG_FORMAT_ENABLED", "no") == "yes"
+
+LOGGING_CATEGORY_HTTP_INBOUND = "http_inbound"
+LOGGING_CATEGORY_HTTP_OUTBOUND = "http_outbound"
+LOGGING_CATEGORY_EXCEPTION = "exception"
+LOGGING_CATEGORY_SOURCE_CODE = "source_code"
+
+LOGGED_HTTP_HEADERS = %w[user-agent x-request-id cf-ray referer device-id].freeze
+
+
+
